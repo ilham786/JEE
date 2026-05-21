@@ -19,7 +19,7 @@ export default function AIStudyCoachPage() {
   const { mistakes, syllabus } = useMistakeStore();
 
   const [chatMessages, setChatMessages] = useState<Array<{ sender: "ai" | "user"; text: string }>>([
-    { sender: "ai", text: "Greetings Aryan! I am ForgeCoach, your JEE study advisor. I have parsed your study sessions, mistake counts, and syllabus progress logs. How can I guide you today?" },
+    { sender: "ai", text: "Greetings Ilham! I am ForgeCoach, your JEE study advisor. I have parsed your study sessions, mistake counts, and syllabus progress logs. How can I guide you today?" },
   ]);
   const [inputText, setInputText] = useState("");
   const [isTyping, setIsTyping] = useState(false);

@@ -22,7 +22,7 @@ async function main() {
     data: {
       id: "student-user-id", // static ID for simplicity in mock operations
       email: "student@focusforge.ai",
-      name: "Aryan Sharma",
+      name: "ILHAM FAROOQUE",
       xp: 3450,
       level: 4,
       currentStreak: 12,

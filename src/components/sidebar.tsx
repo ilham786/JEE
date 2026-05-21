@@ -89,7 +89,7 @@ export function Sidebar() {
                 AS
               </div>
               <div className="overflow-hidden">
-                <p className="text-sm font-medium text-white truncate">Aryan Sharma</p>
+                <p className="text-sm font-medium text-white truncate">ILHAM FAROOQUE</p>
                 <div className="flex items-center gap-1.5 text-xs text-physics">
                   <Flame className="w-3.5 h-3.5 text-orange-500 fill-orange-500/25" />
                   <span>{currentStreak} Day Streak</span>
