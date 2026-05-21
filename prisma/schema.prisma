@@ -1,0 +1,164 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id               String            @id @default(uuid())
+  email            String            @unique
+  name             String?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  
+  // Gamification
+  xp               Int               @default(0)
+  level            Int               @default(1)
+  currentStreak    Int               @default(0)
+  longestStreak    Int               @default(0)
+  lastActive       DateTime?
+  
+  // Settings
+  monkModeEnabled  Boolean           @default(false)
+  whitelistOnly    Boolean           @default(false)
+  examModeEnabled  Boolean           @default(false)
+  ambientSoundType String?           // e.g. "rain", "lofi", "white-noise", "none"
+  ambientVolume    Float             @default(0.5)
+
+  // Relations
+  studySessions    StudySession[]
+  tasks            Task[]
+  mistakes         Mistake[]
+  revisions        Revision[]
+  blockedWebsites  BlockedWebsite[]
+  goals            Goal[]
+  achievements     UserAchievement[]
+  analytics        DailyAnalytics[]
+  distractionLogs  DistractionLog[]
+}
+
+model StudySession {
+  id              String           @id @default(uuid())
+  userId          String
+  user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject         String           // "Physics", "Chemistry", "Maths"
+  chapter         String
+  taskType        String           // "Lecture", "PYQ", "Revision", "Test"
+  mode            String           // "Pomodoro", "DeepWork", "Custom"
+  startTime       DateTime
+  endTime         DateTime?
+  durationMinutes Int              @default(0)
+  focusScore      Float?           // 0 to 100 based on distraction logs
+  notes           String?
+  createdAt       DateTime         @default(now())
+  
+  distractionLogs DistractionLog[]
+}
+
+model Task {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title       String
+  subject     String?
+  chapter     String?
+  type        String   @default("General") // "Lecture", "PYQ", "Revision", "Test"
+  status      String   @default("Todo")    // "Todo", "InProgress", "Done"
+  priority    String   @default("Medium")  // "Low", "Medium", "High"
+  dueDate     DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Mistake {
+  id              String       @id @default(uuid())
+  userId          String
+  user            User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject         String       // "Physics", "Chemistry", "Maths"
+  chapter         String
+  errorType       String       // "Calculation Error", "Conceptual Gap", "Silly Mistake", "Time Pressure"
+  description     String
+  screenshotUrl   String?
+  explanation     String?
+  timesRevised    Int          @default(0)
+  nextRevisionAt  DateTime     @default(now())
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  
+  revisions       Revision[]
+}
+
+model Revision {
+  id             String       @id @default(uuid())
+  userId         String
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mistakeId      String?
+  mistake        Mistake?     @relation(fields: [mistakeId], references: [id], onDelete: SetNull)
+  subject        String
+  chapter        String
+  scheduledDate  DateTime
+  completedAt    DateTime?
+  status         String       @default("Pending") // "Pending", "Completed", "Overdue"
+  revisionCycle  Int          @default(1)         // 1, 3, 7, 15, 30 days
+  createdAt      DateTime     @default(now())
+}
+
+model BlockedWebsite {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  domain    String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model DistractionLog {
+  id             String        @id @default(uuid())
+  userId         String
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  studySessionId String?
+  studySession   StudySession? @relation(fields: [studySessionId], references: [id], onDelete: SetNull)
+  domain         String
+  durationMinutes Int
+  timestamp      DateTime      @default(now())
+}
+
+model DailyAnalytics {
+  id                String   @id @default(uuid())
+  userId            String
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  date              DateTime
+  totalStudyMinutes Int      @default(0)
+  deepWorkMinutes   Int      @default(0)
+  distractedMinutes Int      @default(0)
+  focusScore        Float    @default(0.0)
+  createdAt         DateTime @default(now())
+
+  @@unique([userId, date])
+}
+
+model Goal {
+  id              String    @id @default(uuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title           String
+  subject         String?
+  targetDate      DateTime
+  status          String    @default("Active") // "Active", "Completed", "Failed"
+  currentProgress Float     @default(0.0)
+  targetProgress  Float     @default(100.0)
+  createdAt       DateTime  @default(now())
+}
+
+model UserAchievement {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  badgeId    String
+  unlockedAt DateTime @default(now())
+
+  @@unique([userId, badgeId])
+}
