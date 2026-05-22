@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { useStudyStore, AmbientSound } from "@/store/use-study-store";
 import {
   Flame,

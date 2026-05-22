@@ -1,4 +1,4 @@
-import React from "react";
+import type { ReactNode, ButtonHTMLAttributes } from "react";
 import { motion } from "framer-motion";
 
 interface ProgressBarProps {
@@ -54,7 +54,7 @@ export function ProgressBar({
 interface SectionHeaderProps {
   title: string;
   subtitle?: string;
-  action?: React.ReactNode;
+  action?: ReactNode;
   className?: string;
 }
 
@@ -78,11 +78,11 @@ export function SectionHeader({
 }
 
 interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "danger" | "ghost";
   size?: "sm" | "md" | "lg";
   loading?: boolean;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const variantButtonStyles = {

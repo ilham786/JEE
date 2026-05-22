@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { Play, Pause, RotateCcw } from "lucide-react";
 import { useStudyStore } from "@/store/use-study-store";

@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { WorkspaceLayout } from "@/components/workspace-layout";
 import { useMistakeStore } from "@/store/use-mistake-store";
 import { useStudyStore } from "@/store/use-study-store";

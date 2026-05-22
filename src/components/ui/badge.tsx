@@ -1,4 +1,4 @@
-import React from "react";
+import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { Flame, Zap } from "lucide-react";
 
@@ -6,7 +6,7 @@ interface BadgeProps {
   label: string;
   variant?: "default" | "success" | "warning" | "danger" | "info";
   size?: "sm" | "md" | "lg";
-  icon?: React.ReactNode;
+  icon?: ReactNode;
   className?: string;
 }
 

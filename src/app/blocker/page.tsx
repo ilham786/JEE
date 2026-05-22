@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { WorkspaceLayout } from "@/components/workspace-layout";
 import { useStudyStore } from "@/store/use-study-store";
 import {

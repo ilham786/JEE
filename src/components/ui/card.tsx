@@ -1,8 +1,8 @@
-import React from "react";
+import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 
 interface CardProps {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   variant?: "glass" | "dark" | "accent";
   onClick?: () => void;
@@ -39,8 +39,8 @@ export function Card({
 interface CardHeaderProps {
   title: string;
   subtitle?: string;
-  icon?: React.ReactNode;
-  action?: React.ReactNode;
+  icon?: ReactNode;
+  action?: ReactNode;
   className?: string;
 }
 
@@ -66,7 +66,7 @@ export function CardHeader({
 }
 
 interface CardBodyProps {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }
 
@@ -75,7 +75,7 @@ export function CardBody({ children, className }: CardBodyProps) {
 }
 
 interface CardFooterProps {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }
 
@@ -88,10 +88,10 @@ export function CardFooter({ children, className }: CardFooterProps) {
 }
 
 interface EmptyStateProps {
-  icon?: React.ReactNode;
+  icon?: ReactNode;
   title: string;
   description?: string;
-  action?: React.ReactNode;
+  action?: ReactNode;
   className?: string;
 }
 

@@ -1,11 +1,11 @@
-import React from "react";
+import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 
 interface StatCardProps {
   label: string;
   value: string | number;
   unit?: string;
-  icon?: React.ReactNode;
+  icon?: ReactNode;
   trend?: "up" | "down" | "stable";
   trendValue?: string;
   variant?: "primary" | "secondary" | "accent";

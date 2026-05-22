@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { WorkspaceLayout } from "@/components/workspace-layout";
 import { useMistakeStore, MistakeEntry } from "@/store/use-mistake-store";
 import { useStudyStore } from "@/store/use-study-store";

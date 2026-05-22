@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { useEffect, useState } from "react";
 import { WorkspaceLayout } from "@/components/workspace-layout";
 import { useStudyStore } from "@/store/use-study-store";
 import {
@@ -25,6 +25,11 @@ import {
 
 export default function DistractionTrackerPage() {
   const { simulatedDistractions, blockedWebsites } = useStudyStore();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Mock aggregated stats
   const totalWastedMinutes = simulatedDistractions.reduce((acc, curr) => acc + curr.durationMinutes, 8);
@@ -104,19 +109,23 @@ export default function DistractionTrackerPage() {
           </div>
 
           <div className="h-64 w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={compareData}>
-                <XAxis dataKey="day" stroke="#4b5563" fontSize={11} tickLine={false} />
-                <YAxis stroke="#4b5563" fontSize={11} tickLine={false} />
-                <Tooltip
-                  contentStyle={{ backgroundColor: "#11141d", borderColor: "rgba(255,255,255,0.06)", borderRadius: 8 }}
-                  labelStyle={{ color: "#fff", fontWeight: "bold" }}
-                />
-                <Legend wrapperStyle={{ fontSize: 11 }} />
-                <Bar dataKey="Productive" fill="#10b981" radius={[4, 4, 0, 0]} name="Productive (Min)" />
-                <Bar dataKey="Wasted" fill="#ef4444" radius={[4, 4, 0, 0]} name="Wasted (Min)" />
-              </BarChart>
-            </ResponsiveContainer>
+            {mounted ? (
+              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} aspect={3}>
+                <BarChart data={compareData}>
+                  <XAxis dataKey="day" stroke="#4b5563" fontSize={11} tickLine={false} />
+                  <YAxis stroke="#4b5563" fontSize={11} tickLine={false} />
+                  <Tooltip
+                    contentStyle={{ backgroundColor: "#11141d", borderColor: "rgba(255,255,255,0.06)", borderRadius: 8 }}
+                    labelStyle={{ color: "#fff", fontWeight: "bold" }}
+                  />
+                  <Legend wrapperStyle={{ fontSize: 11 }} />
+                  <Bar dataKey="Productive" fill="#10b981" radius={[4, 4, 0, 0]} name="Productive (Min)" />
+                  <Bar dataKey="Wasted" fill="#ef4444" radius={[4, 4, 0, 0]} name="Wasted (Min)" />
+                </BarChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="h-64 w-full rounded-2xl bg-[#11141d]" />
+            )}
           </div>
         </div>
 
@@ -128,23 +137,27 @@ export default function DistractionTrackerPage() {
           </div>
 
           <div className="h-44 flex items-center justify-center relative">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={domainsSplit}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={50}
-                  outerRadius={65}
-                  paddingAngle={5}
-                  dataKey="value"
-                >
+            {mounted ? (
+              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} aspect={1}>
+                <PieChart>
+                  <Pie
+                    data={domainsSplit}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={50}
+                    outerRadius={65}
+                    paddingAngle={5}
+                    dataKey="value"
+                  >
                   {domainsSplit.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
               </PieChart>
             </ResponsiveContainer>
+            ) : (
+              <div className="h-44 w-full rounded-2xl bg-[#11141d]" />
+            )}
             <div className="absolute text-center">
               <span className="text-[10px] text-gray-400 uppercase tracking-wider block">Wasted Today</span>
               <span className="text-xl font-black text-white">{totalWastedMinutes}m</span>

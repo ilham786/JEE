@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Zap, Shield, BookOpen, Brain, Bot, Target } from "lucide-react";
+import { Zap, Shield, BookOpen, Bot } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -46,6 +46,10 @@ export default function Home() {
 
           <p className="max-w-2xl mx-auto text-base md:text-lg text-gray-400 leading-relaxed">
             Stop raw willpower battles. FocusForge hardwires discipline into your workflow. Track sessions, log mistakes, plan spaced repetitions, block distractions, and unlock IIT-JEE goals.
+          </p>
+
+          <p className="text-sm text-accent-purple font-medium tracking-wide">
+            Developed by <Link href="https://github.com/ilham786" className="underline decoration-accent-purple/30 hover:text-white">ILHAM FAROOQUE</Link>
           </p>
 
           <div className="pt-6 flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -99,7 +103,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="h-16 border-t border-card-border/50 flex items-center justify-center px-6 relative z-10">
         <p className="text-xs text-gray-500">
-          FocusForge &copy; 2026. Built for serious aspirants. Focus. Log. Analyze. Succeed.
+          FocusForge &copy; 2026. Built for serious aspirants. Developed by <Link href="https://github.com/ilham786" className="underline hover:text-white">ILHAM FAROOQUE</Link>.
         </p>
       </footer>
     </div>

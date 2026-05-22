@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { WorkspaceLayout } from "@/components/workspace-layout";
 import { useStudyStore } from "@/store/use-study-store";
@@ -79,6 +79,11 @@ export default function Dashboard() {
   };
 
   const totalSyllabusComplete = calcTotalCompletion();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <WorkspaceLayout title="Productivity Dashboard">
@@ -187,23 +192,27 @@ export default function Dashboard() {
           </div>
 
           <div className="h-64 w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={studyData}>
-                <defs>
-                  <linearGradient id="hoursGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.2}/>
-                    <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0}/>
-                  </linearGradient>
-                </defs>
-                <XAxis dataKey="day" stroke="#4b5563" fontSize={11} tickLine={false} />
-                <YAxis stroke="#4b5563" fontSize={11} tickLine={false} />
-                <Tooltip
-                  contentStyle={{ backgroundColor: "#11141d", borderColor: "rgba(255,255,255,0.06)", borderRadius: 8 }}
-                  labelStyle={{ color: "#fff", fontWeight: "bold" }}
-                />
-                <Area type="monotone" dataKey="Hours" stroke="#8b5cf6" strokeWidth={2} fillOpacity={1} fill="url(#hoursGrad)" name="Hours" />
-              </AreaChart>
-            </ResponsiveContainer>
+            {mounted ? (
+              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} aspect={3}>
+                <AreaChart data={studyData}>
+                  <defs>
+                    <linearGradient id="hoursGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.2}/>
+                      <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0}/>
+                    </linearGradient>
+                  </defs>
+                  <XAxis dataKey="day" stroke="#4b5563" fontSize={11} tickLine={false} />
+                  <YAxis stroke="#4b5563" fontSize={11} tickLine={false} />
+                  <Tooltip
+                    contentStyle={{ backgroundColor: "#11141d", borderColor: "rgba(255,255,255,0.06)", borderRadius: 8 }}
+                    labelStyle={{ color: "#fff", fontWeight: "bold" }}
+                  />
+                  <Area type="monotone" dataKey="Hours" stroke="#8b5cf6" strokeWidth={2} fillOpacity={1} fill="url(#hoursGrad)" name="Hours" />
+                </AreaChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="h-64 w-full rounded-2xl bg-[#11141d]" />
+            )}
           </div>
         </div>
 
@@ -215,23 +224,27 @@ export default function Dashboard() {
           </div>
 
           <div className="h-44 flex items-center justify-center relative">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={subjectData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={60}
-                  outerRadius={75}
-                  paddingAngle={5}
-                  dataKey="value"
-                >
-                  {subjectData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-              </PieChart>
-            </ResponsiveContainer>
+            {mounted ? (
+              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} aspect={1}>
+                <PieChart>
+                  <Pie
+                    data={subjectData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={60}
+                    outerRadius={75}
+                    paddingAngle={5}
+                    dataKey="value"
+                  >
+                    {subjectData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                </PieChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="h-44 w-full rounded-2xl bg-[#11141d]" />
+            )}
             <div className="absolute text-center">
               <span className="text-xs text-gray-400 uppercase tracking-wider block">Today</span>
               <span className="text-2xl font-black text-white">{todayStudyHours}h</span>

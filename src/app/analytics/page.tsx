@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { useEffect, useState } from "react";
 import { WorkspaceLayout } from "@/components/workspace-layout";
 import { useMistakeStore } from "@/store/use-mistake-store";
 import {
@@ -28,6 +28,11 @@ import {
 
 export default function AnalyticsPage() {
   const { mistakes, syllabus } = useMistakeStore();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Aggregate completion averages per subject
   const getSubjectAverages = () => {
@@ -142,23 +147,27 @@ export default function AnalyticsPage() {
           </div>
 
           <div className="h-64 w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={trendData}>
-                <defs>
-                  <linearGradient id="hoursG" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.2}/>
-                    <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0}/>
-                  </linearGradient>
-                </defs>
-                <XAxis dataKey="date" stroke="#4b5563" fontSize={11} tickLine={false} />
-                <YAxis stroke="#4b5563" fontSize={11} tickLine={false} />
-                <Tooltip
-                  contentStyle={{ backgroundColor: "#11141d", borderColor: "rgba(255,255,255,0.06)", borderRadius: 8 }}
-                  labelStyle={{ color: "#fff", fontWeight: "bold" }}
-                />
-                <Area type="monotone" dataKey="Hours" stroke="#8b5cf6" strokeWidth={2} fillOpacity={1} fill="url(#hoursG)" name="Study Hours" />
-              </AreaChart>
-            </ResponsiveContainer>
+            {mounted ? (
+              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} aspect={3}>
+                <AreaChart data={trendData}>
+                  <defs>
+                    <linearGradient id="hoursG" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.2}/>
+                      <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0}/>
+                    </linearGradient>
+                  </defs>
+                  <XAxis dataKey="date" stroke="#4b5563" fontSize={11} tickLine={false} />
+                  <YAxis stroke="#4b5563" fontSize={11} tickLine={false} />
+                  <Tooltip
+                    contentStyle={{ backgroundColor: "#11141d", borderColor: "rgba(255,255,255,0.06)", borderRadius: 8 }}
+                    labelStyle={{ color: "#fff", fontWeight: "bold" }}
+                  />
+                  <Area type="monotone" dataKey="Hours" stroke="#8b5cf6" strokeWidth={2} fillOpacity={1} fill="url(#hoursG)" name="Study Hours" />
+                </AreaChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="h-64 w-full rounded-2xl bg-[#11141d]" />
+            )}
           </div>
         </div>
 
@@ -172,19 +181,23 @@ export default function AnalyticsPage() {
           </div>
 
           <div className="h-64 w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <RechartsBarChart data={compareChartData}>
-                <XAxis dataKey="name" stroke="#4b5563" fontSize={11} tickLine={false} />
-                <YAxis stroke="#4b5563" fontSize={11} tickLine={false} />
-                <Tooltip
-                  contentStyle={{ backgroundColor: "#11141d", borderColor: "rgba(255,255,255,0.06)", borderRadius: 8 }}
-                  labelStyle={{ color: "#fff" }}
-                />
-                <Legend wrapperStyle={{ fontSize: 11 }} />
-                <Bar dataKey="Completion %" fill="#8b5cf6" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="PYQs Solved" fill="#3b82f6" radius={[4, 4, 0, 0]} />
-              </RechartsBarChart>
-            </ResponsiveContainer>
+            {mounted ? (
+              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} aspect={3}>
+                <RechartsBarChart data={compareChartData}>
+                  <XAxis dataKey="name" stroke="#4b5563" fontSize={11} tickLine={false} />
+                  <YAxis stroke="#4b5563" fontSize={11} tickLine={false} />
+                  <Tooltip
+                    contentStyle={{ backgroundColor: "#11141d", borderColor: "rgba(255,255,255,0.06)", borderRadius: 8 }}
+                    labelStyle={{ color: "#fff" }}
+                  />
+                  <Legend wrapperStyle={{ fontSize: 11 }} />
+                  <Bar dataKey="Completion %" fill="#8b5cf6" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="PYQs Solved" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+                </RechartsBarChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="h-64 w-full rounded-2xl bg-[#11141d]" />
+            )}
           </div>
         </div>
       </div>
@@ -202,23 +215,27 @@ export default function AnalyticsPage() {
           </div>
 
           <div className="h-44 flex items-center justify-center relative">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={errorData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={50}
-                  outerRadius={65}
-                  paddingAngle={5}
-                  dataKey="value"
-                >
+            {mounted ? (
+              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} aspect={1}>
+                <PieChart>
+                  <Pie
+                    data={errorData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={50}
+                    outerRadius={65}
+                    paddingAngle={5}
+                    dataKey="value"
+                  >
                   {errorData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
               </PieChart>
             </ResponsiveContainer>
+            ) : (
+              <div className="h-44 w-full rounded-2xl bg-[#11141d]" />
+            )}
           </div>
 
           <div className="space-y-1.5 text-xs">

@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "FocusForge - JEE Study Operating System",
   description: "A professional dark-mode glassmorphic study workspace designed specifically for JEE & competitive exam students to maximize discipline and focus.",
-  authors: [{ name: "FocusForge Team" }],
+  authors: [{ name: "ILHAM FAROOQUE", url: "https://github.com/ilham786" }],
   keywords: ["JEE", "NEET", "study", "exam", "competitive", "focus", "productivity"],
   openGraph: {
     title: "FocusForge",

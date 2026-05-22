@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Sidebar } from "./sidebar";
 import { Header } from "./header";
 import { SoundPlayer } from "./sound-player";
