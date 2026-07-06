@@ -108,10 +108,10 @@ export default function DistractionTrackerPage() {
             <p className="text-xs text-gray-400">Comparing productive minutes vs. distraction minutes weekly</p>
           </div>
 
-          <div className="h-64 w-full">
+          <div className="h-72 w-full">
             {mounted ? (
-              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} aspect={3}>
-                <BarChart data={compareData}>
+              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
+                <BarChart data={compareData} margin={{ top: 10, right: 5, left: -20, bottom: 5 }}>
                   <XAxis dataKey="day" stroke="#4b5563" fontSize={11} tickLine={false} />
                   <YAxis stroke="#4b5563" fontSize={11} tickLine={false} />
                   <Tooltip
@@ -124,7 +124,7 @@ export default function DistractionTrackerPage() {
                 </BarChart>
               </ResponsiveContainer>
             ) : (
-              <div className="h-64 w-full rounded-2xl bg-[#11141d]" />
+              <div className="h-72 w-full rounded-2xl bg-[#11141d]" />
             )}
           </div>
         </div>
@@ -138,7 +138,7 @@ export default function DistractionTrackerPage() {
 
           <div className="h-44 flex items-center justify-center relative">
             {mounted ? (
-              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} aspect={1}>
+              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                 <PieChart>
                   <Pie
                     data={domainsSplit}
@@ -158,7 +158,7 @@ export default function DistractionTrackerPage() {
             ) : (
               <div className="h-44 w-full rounded-2xl bg-[#11141d]" />
             )}
-            <div className="absolute text-center">
+            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center">
               <span className="text-[10px] text-gray-400 uppercase tracking-wider block">Wasted Today</span>
               <span className="text-xl font-black text-white">{totalWastedMinutes}m</span>
             </div>

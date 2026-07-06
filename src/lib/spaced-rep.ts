@@ -59,16 +59,6 @@ export function isOverdue(scheduledDate: Date): boolean {
   return new Date() > new Date(scheduledDate);
 }
 
-/**
- * Calculate days until next review
- */
-export function daysUntilReview(scheduledDate: Date): number {
-  const now = new Date();
-  const scheduled = new Date(scheduledDate);
-  const diffTime = Math.abs(scheduled.getTime() - now.getTime());
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  return isOverdue(scheduledDate) ? -diffDays : diffDays;
-}
 
 /**
  * Get all mistakes/revisions due for today or overdue
@@ -95,83 +85,4 @@ export function getUpcomingItems<T extends { nextRevisionAt: string }>(
   });
 }
 
-/**
- * Calculate optimal study load based on mistake frequency
- * Returns recommended daily review count
- */
-export function calculateDailyReviewLoad(
-  totalMistakes: number,
-  daysAvailable: number = 30
-): number {
-  // Assume each mistake needs 2-3 reviews in first 30 days
-  const totalReviewsNeeded = totalMistakes * 2.5;
-  return Math.ceil(totalReviewsNeeded / daysAvailable);
-}
 
-/**
- * Generate a study schedule for a chapter based on completion percentage
- * and weak topics
- */
-export function generateChapterSchedule(
-  completion: number,
-  weakTopicsCount: number,
-  targetCompletionDays: number = 30
-): Date[] {
-  const schedule: Date[] = [];
-  const startDate = new Date();
-
-  // First review: immediate (today or tomorrow)
-  schedule.push(new Date(startDate.getTime() + 24 * 60 * 60 * 1000));
-
-  // Subsequent reviews based on weak topics and completion
-  const reviewCount = Math.min(5, Math.ceil(weakTopicsCount / 2) + 2);
-  const daysPerReview = Math.floor(targetCompletionDays / reviewCount);
-
-  for (let i = 1; i < reviewCount; i++) {
-    const nextReview = new Date(startDate);
-    nextReview.setDate(nextReview.getDate() + daysPerReview * i);
-    schedule.push(nextReview);
-  }
-
-  return schedule;
-}
-
-/**
- * Calculate time investment needed to complete a syllabus chapter
- * Based on: completion %, weak topics, PYQs solved/total
- */
-export interface TimeEstimate {
-  totalHoursNeeded: number;
-  daysToComplete: number;
-  hoursPerDay: number;
-}
-
-export function estimateTimeNeeded(
-  completion: number,
-  pyqsSolved: number,
-  pyqsTotal: number,
-  weakTopicsCount: number
-): TimeEstimate {
-  // Base time: 10 hours per chapter
-  let baseTime = 10;
-
-  // Add time for weak topics (1.5 hours each)
-  baseTime += weakTopicsCount * 1.5;
-
-  // Add time for remaining PYQs (15 mins each)
-  const remainingPyqs = pyqsTotal - pyqsSolved;
-  baseTime += (remainingPyqs * 0.25);
-
-  // Reduce by completion percentage
-  const hoursNeeded = Math.max(2, baseTime * ((100 - completion) / 100));
-
-  // Assume 2 hours study per day for dedicated preparation
-  const studyHoursPerDay = 2;
-  const daysToComplete = Math.ceil(hoursNeeded / studyHoursPerDay);
-
-  return {
-    totalHoursNeeded: parseFloat(hoursNeeded.toFixed(1)),
-    daysToComplete,
-    hoursPerDay: studyHoursPerDay,
-  };
-}

@@ -204,7 +204,7 @@ export default function MistakeJournalPage() {
               </div>
 
               <form onSubmit={handleCreateMistake} className="space-y-4">
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div className="space-y-1.5">
                     <label className="text-xs text-gray-400">Subject</label>
                     <select
@@ -333,7 +333,7 @@ export default function MistakeJournalPage() {
                           {mistake.errorType}
                         </span>
 
-                        <span className="text-[10px] text-gray-500 ml-auto">
+                        <span className="text-[10px] text-gray-500 sm:ml-auto shrink-0">
                           Cycle: {mistake.timesRevised} revisions
                         </span>
                       </div>

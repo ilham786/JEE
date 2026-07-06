@@ -155,7 +155,7 @@ export default function BlockerSettingsPage() {
               <Globe className="w-5 h-5 text-accent-purple" /> Blocked Domains Registry
             </h2>
 
-            <form onSubmit={handleAddWebsite} className="flex gap-2">
+            <form onSubmit={handleAddWebsite} className="flex flex-col sm:flex-row gap-2">
               <input
                 type="text"
                 placeholder="E.g. instagram.com, facebook.com"
@@ -165,10 +165,11 @@ export default function BlockerSettingsPage() {
               />
               <button
                 type="submit"
-                className="px-4 py-2.5 bg-accent-purple hover:bg-[#7c4ce6] text-white font-semibold rounded-lg text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+                className="px-4 py-2.5 bg-accent-purple hover:bg-[#7c4ce6] text-white font-semibold rounded-lg text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer shrink-0"
               >
                 <Plus className="w-4 h-4" />
-                Shield Domain
+                <span className="hidden sm:inline">Shield Domain</span>
+                <span className="sm:hidden">Add</span>
               </button>
             </form>
 

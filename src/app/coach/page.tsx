@@ -165,7 +165,7 @@ export default function AIStudyCoachPage() {
         </div>
 
         {/* Right Side: Interactive Chat Panel */}
-        <div className="lg:col-span-2 glass-panel rounded-xl flex flex-col h-[520px] overflow-hidden">
+        <div className="lg:col-span-2 glass-panel rounded-xl flex flex-col h-[400px] sm:h-[520px] overflow-hidden">
           
           {/* Header */}
           <div className="px-5 py-4 border-b border-card-border bg-[#11141d]/50 flex items-center justify-between">

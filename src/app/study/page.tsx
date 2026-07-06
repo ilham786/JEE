@@ -124,16 +124,16 @@ export default function StudySessionPage() {
   // Monk Mode component content
   if (monkModeEnabled && status === "focus") {
     return (
-      <div className="fixed inset-0 bg-black z-50 flex flex-col items-center justify-center p-6 select-none transition-all">
+      <div className="fixed inset-0 bg-black z-50 flex flex-col items-center justify-center p-4 md:p-6 select-none transition-all">
         {/* Ambient indicator */}
-        <div className="absolute top-8 left-8 flex items-center gap-3 text-xs text-zinc-500 font-semibold tracking-wider uppercase">
+        <div className="absolute top-4 left-4 md:top-8 md:left-8 flex items-center gap-3 text-xs text-zinc-500 font-semibold tracking-wider uppercase">
           <span className="w-2.5 h-2.5 rounded-full bg-accent-purple animate-pulse" />
           Monk Session: {activeSession?.subject} - {activeSession?.chapter}
         </div>
 
         {/* Digital focus display */}
         <div className="flex flex-col items-center space-y-8 text-center max-w-md w-full">
-          <h2 className="text-8xl md:text-9xl font-black text-white font-mono tracking-tighter tabular-nums select-all">
+          <h2 className="text-6xl sm:text-8xl md:text-9xl font-black text-white font-mono tracking-tighter tabular-nums select-all">
             {formatTime(timeLeft)}
           </h2>
 
@@ -163,7 +163,7 @@ export default function StudySessionPage() {
         </div>
 
         {/* Exit panel */}
-        <div className="absolute bottom-8 flex flex-col items-center gap-3">
+        <div className="absolute bottom-4 md:bottom-8 flex flex-col items-center gap-3">
           <button
             onClick={toggleMonkMode}
             className="flex items-center gap-2 text-xs font-semibold text-zinc-500 hover:text-red-400 transition-colors bg-zinc-950 border border-zinc-900 px-4 py-2.5 rounded-full"
@@ -191,7 +191,7 @@ export default function StudySessionPage() {
                 <p className="text-xs text-gray-400">Choose subject and length parameters to begin.</p>
               </div>
 
-              <div className="grid grid-cols-2 gap-4 text-left">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
                 {/* Subject selector */}
                 <div className="space-y-1.5">
                   <label className="text-xs text-gray-400 font-medium">Subject</label>
@@ -278,8 +278,8 @@ export default function StudySessionPage() {
             // Active timer UI
             <div className="flex flex-col items-center space-y-6 max-w-sm w-full">
               {/* Circular progress container */}
-              <div className="relative w-56 h-56 flex items-center justify-center">
-                <svg className="absolute w-full h-full transform -rotate-90">
+              <div className="relative w-44 h-44 sm:w-56 sm:h-56 flex items-center justify-center">
+                <svg className="absolute w-full h-full transform -rotate-90" viewBox="0 0 224 224">
                   <circle
                     cx="112"
                     cy="112"
@@ -302,7 +302,7 @@ export default function StudySessionPage() {
                 </svg>
 
                 <div className="text-center z-10 space-y-1">
-                  <span className="text-4xl md:text-5xl font-black font-mono text-white tabular-nums">
+                  <span className="text-3xl sm:text-4xl md:text-5xl font-black font-mono text-white tabular-nums">
                     {formatTime(timeLeft)}
                   </span>
                   <span className="text-[10px] text-gray-400 font-bold tracking-wider uppercase block">
@@ -441,7 +441,7 @@ export default function StudySessionPage() {
       {/* Complete Review Modal */}
       {showReviewModal && (
         <>
-          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 md:p-4">
             <div className="glass-panel p-6 rounded-xl max-w-md w-full space-y-4">
               <h3 className="text-base font-bold text-white">Log Study Session</h3>
               <p className="text-xs text-gray-400">Describe the output of this study zone for your mistake journal and coach logs.</p>

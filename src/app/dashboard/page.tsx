@@ -89,11 +89,11 @@ export default function Dashboard() {
     <WorkspaceLayout title="Productivity Dashboard">
       {/* Top Banner / Session Alert */}
       {status === "focus" && activeSession && (
-        <div className="p-4 rounded-xl border border-accent-purple/30 bg-accent-purple/5 flex items-center justify-between">
+        <div className="p-3 md:p-4 rounded-xl border border-accent-purple/30 bg-accent-purple/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <span className="w-2.5 h-2.5 rounded-full bg-accent-purple animate-ping" />
             <div>
-              <p className="text-sm font-semibold text-white">Active Session: {activeSession.subject} ({activeSession.chapter})</p>
+              <p className="text-xs sm:text-sm font-semibold text-white">Active Session: {activeSession.subject} ({activeSession.chapter})</p>
               <p className="text-xs text-gray-400">Deep Work in progress. Stay in the zone.</p>
             </div>
           </div>
@@ -191,10 +191,10 @@ export default function Dashboard() {
             </span>
           </div>
 
-          <div className="h-64 w-full">
+          <div className="h-72 w-full">
             {mounted ? (
-              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} aspect={3}>
-                <AreaChart data={studyData}>
+              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
+                <AreaChart data={studyData} margin={{ top: 10, right: 5, left: -20, bottom: 0 }}>
                   <defs>
                     <linearGradient id="hoursGrad" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.2}/>
@@ -211,7 +211,7 @@ export default function Dashboard() {
                 </AreaChart>
               </ResponsiveContainer>
             ) : (
-              <div className="h-64 w-full rounded-2xl bg-[#11141d]" />
+              <div className="h-72 w-full rounded-2xl bg-[#11141d]" />
             )}
           </div>
         </div>
@@ -225,7 +225,7 @@ export default function Dashboard() {
 
           <div className="h-44 flex items-center justify-center relative">
             {mounted ? (
-              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} aspect={1}>
+              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                 <PieChart>
                   <Pie
                     data={subjectData}
@@ -245,7 +245,7 @@ export default function Dashboard() {
             ) : (
               <div className="h-44 w-full rounded-2xl bg-[#11141d]" />
             )}
-            <div className="absolute text-center">
+            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center">
               <span className="text-xs text-gray-400 uppercase tracking-wider block">Today</span>
               <span className="text-2xl font-black text-white">{todayStudyHours}h</span>
             </div>
@@ -273,12 +273,12 @@ export default function Dashboard() {
             <p className="text-xs text-gray-400">Daily study density mapping for the past 30 days</p>
           </div>
 
-          <div className="flex flex-wrap gap-2 items-center">
-            <div className="grid grid-cols-10 gap-2 shrink-0">
+          <div className="flex flex-col md:flex-row gap-4 md:gap-2 items-stretch md:items-center">
+            <div className="mobile-scroll-x"><div className="grid grid-cols-10 gap-1.5 sm:gap-2 shrink-0">
               {heatmapDays.map((day) => (
                 <div
                   key={day.day}
-                  className={`w-6 h-6 rounded-md transition-colors relative group border border-black/10 ${
+                  className={`w-5 h-5 sm:w-6 sm:h-6 rounded-md transition-colors relative group border border-black/10 ${
                     day.intensity === 4
                       ? "bg-accent-purple"
                       : day.intensity === 3
@@ -296,9 +296,9 @@ export default function Dashboard() {
                   </span>
                 </div>
               ))}
-            </div>
+            </div></div>
             
-            <div className="flex-1 min-w-[200px] border-l border-card-border pl-6 py-2 space-y-3">
+            <div className="flex-1 border-t md:border-t-0 md:border-l border-card-border pt-4 md:pt-0 md:pl-6 py-2 space-y-3">
               <div className="flex items-center justify-between text-xs text-gray-400">
                 <span>Monthly Target Completed</span>
                 <span className="text-white font-bold">78%</span>

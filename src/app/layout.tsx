@@ -1,6 +1,5 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Providers } from "@/components/providers";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -25,6 +24,15 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: "cover",
+  themeColor: "#090a0f",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -37,10 +45,9 @@ export default function RootLayout({
     >
       <head>
         <meta name="color-scheme" content="dark" />
-        <meta name="theme-color" content="#090a0f" />
       </head>
       <body className="min-h-full flex flex-col bg-[#090a0f] text-foreground">
-        <Providers>{children}</Providers>
+        {children}
       </body>
     </html>
   );

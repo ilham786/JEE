@@ -146,10 +146,10 @@ export default function AnalyticsPage() {
             <p className="text-xs text-gray-400">Total deep work hours logged over the past 7 days</p>
           </div>
 
-          <div className="h-64 w-full">
+          <div className="h-72 w-full">
             {mounted ? (
-              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} aspect={3}>
-                <AreaChart data={trendData}>
+              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
+                <AreaChart data={trendData} margin={{ top: 10, right: 5, left: -20, bottom: 0 }}>
                   <defs>
                     <linearGradient id="hoursG" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.2}/>
@@ -166,7 +166,7 @@ export default function AnalyticsPage() {
                 </AreaChart>
               </ResponsiveContainer>
             ) : (
-              <div className="h-64 w-full rounded-2xl bg-[#11141d]" />
+              <div className="h-72 w-full rounded-2xl bg-[#11141d]" />
             )}
           </div>
         </div>
@@ -180,10 +180,10 @@ export default function AnalyticsPage() {
             <p className="text-xs text-gray-400">Average syllabus completion & PYQs solved</p>
           </div>
 
-          <div className="h-64 w-full">
+          <div className="h-72 w-full">
             {mounted ? (
-              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} aspect={3}>
-                <RechartsBarChart data={compareChartData}>
+              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
+                <RechartsBarChart data={compareChartData} margin={{ top: 10, right: 5, left: -20, bottom: 5 }}>
                   <XAxis dataKey="name" stroke="#4b5563" fontSize={11} tickLine={false} />
                   <YAxis stroke="#4b5563" fontSize={11} tickLine={false} />
                   <Tooltip
@@ -196,7 +196,7 @@ export default function AnalyticsPage() {
                 </RechartsBarChart>
               </ResponsiveContainer>
             ) : (
-              <div className="h-64 w-full rounded-2xl bg-[#11141d]" />
+              <div className="h-72 w-full rounded-2xl bg-[#11141d]" />
             )}
           </div>
         </div>
@@ -216,7 +216,7 @@ export default function AnalyticsPage() {
 
           <div className="h-44 flex items-center justify-center relative">
             {mounted ? (
-              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} aspect={1}>
+              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                 <PieChart>
                   <Pie
                     data={errorData}

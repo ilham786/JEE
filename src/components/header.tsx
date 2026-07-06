@@ -15,9 +15,15 @@ import {
   Wind,
   Moon,
   Sun,
+  Menu,
 } from "lucide-react";
 
-export function Header({ title }: { title: string }) {
+interface HeaderProps {
+  title: string;
+  onMobileMenuToggle?: () => void;
+}
+
+export function Header({ title, onMobileMenuToggle }: HeaderProps) {
   const {
     monkModeEnabled,
     toggleMonkMode,
@@ -32,32 +38,43 @@ export function Header({ title }: { title: string }) {
 
   const [soundMenuOpen, setSoundMenuOpen] = useState(false);
 
-  const sounds: { id: AmbientSound; name: string; icon: React.ReactNode } = [
+  const sounds: Array<{ id: AmbientSound; name: string; icon: React.ReactNode }> = [
     { id: "none", name: "Silence", icon: <VolumeX className="w-4 h-4" /> },
     { id: "rain", name: "Rainfall", icon: <Wind className="w-4 h-4" /> },
     { id: "white-noise", name: "White Noise", icon: <Coffee className="w-4 h-4" /> },
     { id: "lofi", name: "Focus Drone", icon: <Brain className="w-4 h-4" /> },
-  ] as unknown as { id: AmbientSound; name: string; icon: React.ReactNode };
+  ];
 
-  const activeSound = (sounds as unknown as Array<{ id: AmbientSound; name: string; icon: React.ReactNode }>).find(
+  const activeSound = sounds.find(
     (s) => s.id === ambientSound
   );
 
   return (
-    <header className="flex items-center justify-between h-16 px-6 border-b border-card-border bg-[#0d0f12]/50 backdrop-blur-md relative z-40">
-      <div>
-        <h1 className="text-lg font-semibold text-white tracking-wide">{title}</h1>
+    <header className="flex items-center justify-between h-14 md:h-16 px-3 md:px-6 border-b border-card-border bg-[#0d0f12]/50 backdrop-blur-md relative z-40 gap-2">
+      <div className="flex items-center gap-2 md:gap-3 min-w-0">
+        {/* Mobile hamburger menu button */}
+        {onMobileMenuToggle && (
+          <button
+            onClick={onMobileMenuToggle}
+            className="md:hidden flex items-center justify-center w-9 h-9 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors shrink-0"
+            aria-label="Open menu"
+          >
+            <Menu className="w-5 h-5" />
+          </button>
+        )}
+
+        <h1 className="text-sm md:text-lg font-semibold text-white tracking-wide truncate">{title}</h1>
       </div>
 
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-2 md:gap-6 shrink-0">
         {/* Ambient Audio Panel */}
         <div className="relative">
           <button
             onClick={() => setSoundMenuOpen(!soundMenuOpen)}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-card-border bg-white/2 hover:bg-white/6 text-sm text-gray-300 hover:text-white transition-colors"
+            className="flex items-center gap-1.5 md:gap-2 px-2 md:px-3 py-1.5 rounded-lg border border-card-border bg-white/2 hover:bg-white/6 text-sm text-gray-300 hover:text-white transition-colors"
           >
             <Music className="w-4 h-4 text-accent-purple" />
-            <span className="text-xs font-medium shrink-0">
+            <span className="text-xs font-medium shrink-0 hidden sm:inline">
               {activeSound ? activeSound.name : "Sounds"}
             </span>
           </button>
@@ -123,7 +140,7 @@ export function Header({ title }: { title: string }) {
         {/* Monk Mode Toggle Button */}
         <button
           onClick={toggleMonkMode}
-          className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs font-medium transition-all ${
+          className={`flex items-center gap-1.5 md:gap-2 px-2 md:px-3 py-1.5 rounded-lg border text-xs font-medium transition-all ${
             monkModeEnabled
               ? "bg-accent-purple/25 border-accent-purple text-accent-purple shadow-sm shadow-accent-purple/10"
               : "bg-white/2 border-card-border text-gray-400 hover:text-white hover:bg-white/5"
@@ -133,19 +150,19 @@ export function Header({ title }: { title: string }) {
           {monkModeEnabled ? (
             <>
               <Eye className="w-4 h-4" />
-              <span>Monk Mode On</span>
+              <span className="hidden sm:inline">Monk Mode On</span>
             </>
           ) : (
             <>
               <EyeOff className="w-4 h-4" />
-              <span>Monk Mode Off</span>
+              <span className="hidden sm:inline">Monk Mode Off</span>
             </>
           )}
         </button>
 
-        {/* Level and Streak (compact display) */}
+        {/* Level and Streak (compact display) — hidden on small mobile */}
         {!monkModeEnabled && (
-          <div className="flex items-center gap-4 border-l border-card-border pl-4">
+          <div className="hidden sm:flex items-center gap-4 border-l border-card-border pl-4">
             <div className="flex items-center gap-1.5 text-orange-500 font-semibold text-sm">
               <Flame className="w-4 h-4 fill-orange-500/20" />
               <span>{currentStreak}d</span>

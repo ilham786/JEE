@@ -120,7 +120,7 @@ export default function RevisionPlanPage() {
                   key={m.id}
                   className="glass-panel p-5 rounded-xl border border-card-border hover:border-card-hover-border transition-all flex flex-col justify-between"
                 >
-                  <div className="flex items-center justify-between mb-2">
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                     <div className="flex gap-2">
                       <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-accent-purple/20 border border-accent-purple/30 text-accent-purple uppercase">
                         {m.subject}
@@ -129,7 +129,7 @@ export default function RevisionPlanPage() {
                         {m.chapter}
                       </span>
                     </div>
-                    <span className="text-[10px] text-gray-500">
+                    <span className="text-[10px] text-gray-500 shrink-0">
                       Revision cycle: Stage {m.timesRevised}
                     </span>
                   </div>
@@ -169,7 +169,7 @@ export default function RevisionPlanPage() {
               <Calendar className="w-4 h-4 text-accent-purple" /> Upcoming Calendar
             </h3>
             
-            <div className="grid grid-cols-7 gap-2.5 text-center">
+            <div className="mobile-scroll-x"><div className="grid grid-cols-7 gap-1.5 sm:gap-2.5 text-center min-w-[280px]">
               {next7Days.map((day, i) => (
                 <div
                   key={i}
@@ -186,7 +186,7 @@ export default function RevisionPlanPage() {
                   )}
                 </div>
               ))}
-            </div>
+            </div></div>
 
             <p className="text-[10px] text-gray-500 leading-relaxed pt-2 border-t border-card-border">
               Revisions are spaced automatically. The system distributes them to prevent cognitive fatigue. Try to review on the exact day.

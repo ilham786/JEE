@@ -85,7 +85,7 @@ export default function JeeProductivityPage() {
               setActiveTab(subject);
               setEditingChapterId(null);
             }}
-            className={`px-6 py-3.5 text-xs font-bold uppercase tracking-wider transition-all relative border-b-2 ${
+            className={`px-3 sm:px-6 py-3 sm:py-3.5 text-xs font-bold uppercase tracking-wider transition-all relative border-b-2 ${
               activeTab === subject
                 ? "text-white border-accent-purple bg-accent-purple/5"
                 : "text-gray-400 hover:text-white border-transparent hover:bg-white/2"

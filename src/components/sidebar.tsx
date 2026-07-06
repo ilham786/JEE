@@ -19,9 +19,14 @@ import {
   ChevronRight,
   Flame,
   Zap,
+  X,
 } from "lucide-react";
 
-export function Sidebar() {
+interface SidebarProps {
+  onMobileClose?: () => void;
+}
+
+export function Sidebar({ onMobileClose }: SidebarProps) {
   const pathname = usePathname();
   const { monkModeEnabled, xp, level, currentStreak } = useStudyStore();
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -67,12 +72,24 @@ export function Sidebar() {
           </div>
         )}
         
+        {/* Desktop collapse/expand toggle — hidden on mobile */}
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="absolute -right-3 top-5 flex items-center justify-center w-6 h-6 rounded-full border border-card-border bg-[#121620] text-gray-400 hover:text-white transition-colors"
+          className="absolute -right-3 top-5 hidden md:flex items-center justify-center w-6 h-6 rounded-full border border-card-border bg-[#121620] text-gray-400 hover:text-white transition-colors"
         >
           {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
         </button>
+
+        {/* Mobile close button — visible only on mobile */}
+        {onMobileClose && (
+          <button
+            onClick={onMobileClose}
+            className="md:hidden flex items-center justify-center w-8 h-8 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
+            aria-label="Close menu"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        )}
       </div>
 
       {/* Profile & Level Bar (Hidden in Monk Mode or simplified) */}
@@ -115,13 +132,13 @@ export function Sidebar() {
       </AnimatePresence>
 
       {/* Menu items */}
-      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto safe-area-bottom">
         {filteredMenuItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href;
 
           return (
-            <Link key={item.name} href={item.href}>
+            <Link key={item.name} href={item.href} onClick={onMobileClose}>
               <div
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all relative ${
                   isActive
