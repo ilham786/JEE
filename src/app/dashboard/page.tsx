@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { WorkspaceLayout } from "@/components/workspace-layout";
 import { useStudyStore } from "@/store/use-study-store";
@@ -55,15 +55,23 @@ export default function Dashboard() {
     { name: "Maths", value: 40, color: "#f59e0b" },
   ];
 
-  // Simulated 30-day heatmap grid data
-  const heatmapDays = Array.from({ length: 30 }, (_, i) => {
-    const hours = i === 29 ? todayStudyHours : Math.random() * 9;
-    return {
-      day: i + 1,
-      hours: hours,
-      intensity: hours > 8 ? 4 : hours > 6 ? 3 : hours > 3 ? 2 : hours > 1 ? 1 : 0,
-    };
-  });
+  // Simulated 30-day heatmap grid data.
+  // Uses a deterministic pseudo-random value seeded by the day index (not Math.random)
+  // so the server and client render identical markup (no hydration mismatch) and the
+  // grid stays stable across re-renders instead of reshuffling on every state change.
+  const heatmapDays = useMemo(
+    () =>
+      Array.from({ length: 30 }, (_, i) => {
+        const seeded = ((i * 9301 + 49297) % 233280) / 233280; // 0..1, deterministic
+        const hours = i === 29 ? todayStudyHours : seeded * 9;
+        return {
+          day: i + 1,
+          hours,
+          intensity: hours > 8 ? 4 : hours > 6 ? 3 : hours > 3 ? 2 : hours > 1 ? 1 : 0,
+        };
+      }),
+    [todayStudyHours]
+  );
 
   // Calculate syllabus completion percentage
   const calcTotalCompletion = () => {

@@ -38,8 +38,10 @@ export function calculateNextReviewDate(
     efFactor = efFactor + (quality - 3) * 0.1;
   }
 
-  // Adjust days based on ease factor
-  const adjustedDays = Math.ceil(daysUntilNextReview * efFactor);
+  // Adjust days based on ease factor, normalized so neutral quality (EF unchanged)
+  // yields the plain standard interval. Only quality deviations shorten/lengthen it,
+  // instead of always multiplying the interval by the full ease factor.
+  const adjustedDays = Math.ceil(daysUntilNextReview * (efFactor / initialEF));
 
   const nextReviewDate = new Date();
   nextReviewDate.setDate(nextReviewDate.getDate() + adjustedDays);
