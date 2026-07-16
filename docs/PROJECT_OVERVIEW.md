@@ -1,44 +1,54 @@
 # FocusForge — Project Overview
 
-## Purpose
-FocusForge is a **study operating system for JEE / competitive-exam aspirants**. It turns
-discipline into a workflow: timed focus sessions, a spaced-repetition mistake journal,
-syllabus tracking, distraction blocking, and a heuristic "AI coach" — wrapped in a dark,
-glassmorphic, gamified (XP / levels / streaks) interface.
+FocusForge is a comprehensive, gamified study workspace and workflow manager designed specifically for IIT-JEE and competitive-exam aspirants. By consolidating study timers, revision planners, mistake logs, distraction blocking, progress tracking, and heuristic coaching under a unified, high-focus interface, FocusForge aims to replace scattered study tools with a centralized "study operating system."
 
-Author: ILHAM FAROOQUE (https://github.com/ilham786). Package name: `focusforge`.
+Developed by **ILHAM FAROOQUE** (https://github.com/ilham786). Package name: `focusforge`.
 
-## Architecture summary
-- **Next.js 16.2.6, App Router**, React 19, TypeScript (strict), Tailwind CSS v4.
-- **100% client-rendered** feature pages (`"use client"`); every route prerenders as static.
-- **State = two Zustand stores persisted to `localStorage`** — this is the live data layer.
-- **Prisma + SQLite schema exists but is NOT wired to the UI.** `prisma/schema.prisma` and
-  `src/lib/db.ts` define a full relational model (User, StudySession, Mistake, Revision,
-  DailyAnalytics, …) for a future backend. Today the UI reads/writes only the Zustand stores,
-  which are seeded with hardcoded demo data. Treat the DB as scaffolding, not a source of truth.
-- **Charts** via Recharts, **animation** via framer-motion, **icons** via lucide-react,
-  **celebration** via canvas-confetti, **ambient audio** via the Web Audio API (synthesised,
-  no audio files).
-- `src/types/tauri.d.ts` hints at future Tauri desktop packaging (not active).
+---
 
-## Core features (one route each, all under `WorkspaceLayout`)
-| Route | Feature |
-|-------|---------|
-| `/` | Marketing landing page (standalone, no workspace chrome) |
-| `/dashboard` | KPIs, study-trend charts, subject split, consistency heatmap, gamification |
-| `/study` | Focus timer (Pomodoro 50m / Deep Work 90m / Custom), Monk Mode fullscreen, session review → XP + confetti |
-| `/mistakes` | Mistake journal; new mistakes auto-scheduled for spaced revision |
-| `/revisions` | Spaced-repetition revision queue (due / upcoming) |
-| `/jee` | Syllabus/chapter progress tracker per subject |
-| `/tracker` | Distraction logs |
-| `/blocker` | Web blocker configuration (simulated) |
-| `/coach` | Heuristic advisory ("AI coach") — `src/lib/coach-logic.ts` |
-| `/analytics` | Full analytics dashboards |
+## 1. Primary Goals
 
-## Gamification model
-- 1000 XP per level. Session completion awards ~100–200 XP (scaled by focus score);
-  timer auto-completion awards 200 XP. Streaks increment on `completeSession`.
-- Stores seed at XP 3450 / Level 4 / streak 12 (demo).
+The application is engineered to address the critical friction points of preparation for competitive exams:
 
-See `ARCHITECTURE.md` for data flow, `DESIGN_SYSTEM.md` for the visual language,
-`COMPONENT_MAP.md` for components, and `AI_CONTEXT.md` before writing code.
+*   **Discipline Enforcement over Willpower**: Willpower is finite. FocusForge automates focus cycles, enforces boundaries, and prompts structural reviews to reduce decision fatigue.
+*   **Active Recall & Spaced Repetition**: Standard study routines fail to systematically revisit errors. FocusForge integrates error logging directly with spaced-repetition schedules (via SuperMemo-2 calculations) to force memory reinforcement.
+*   **Information Consolidation**: Scattered syllabus documents, Excel trackers, paper timers, and physical diaries are replaced with a single glassmorphic dashboard tracking syllabus, streak metrics, and analytics.
+*   **Focus Isolation**: Blocker simulators and "Monk Mode" interfaces isolate students from browser distractions, providing visual enforcement of study commitments.
+
+---
+
+## 2. Target Users
+
+The primary user group consists of **IIT-JEE (Advanced/Mains) and competitive engineering/medical exam aspirants** preparing for high-stakes tests:
+*   **Requirements**: Strict division of syllabus across core subjects (Physics, Chemistry, Mathematics), high volume of Past Year Questions (PYQs), repeated mock testing, and tracking of specific conceptual and silly errors.
+*   **Needs**: Streak and level mechanics to gamify routine practice, clean visual analytics on focus efficiency, and immediate revision cues to lock in weak concepts.
+
+---
+
+## 3. Core Functionality
+
+FocusForge contains ten primary application routes, divided into specific modules:
+
+| Route | Feature Area | Description |
+|---|---|---|
+| `/` | **Landing Page** | High-fidelity entrance page presenting FocusForge features, call-to-actions, and developer attributions. |
+| `/dashboard` | **Central Hub** | Main workspace console displaying XP metrics, active level bars, consecutive study streaks, syllabus progress summaries, and a weekly productivity heatmap. |
+| `/study` | **Study Workspace** | Timer module supporting Pomodoro (50m), Deep Work (90m), and Custom duration configurations. Includes active ticker displays, completing alerts, Monk Mode, and background audio loops. |
+| `/mistakes` | **Mistake Journal** | Diary mapping logged conceptual gaps, silliness, calculation errors, or time pressure mistakes. Supports chapter tagging and full-text searches. |
+| `/revisions` | **Revision Scheduler** | Spaced-repetition planner showing due items, upcoming revision requirements, and calendars. |
+| `/jee` | **Syllabus Tracker** | Chapter completion percentages, PYQ trackers, and formula sheets reference content for Physics, Chemistry, and Mathematics. |
+| `/tracker` | **Distraction Logs** | Real-time tracking charts showing simulated distraction domains visited during focus sessions. |
+| `/blocker` | **Domain Blocker** | Simulator to customize domain blocklists, restrict whitelist-only lists, or lock the system in exam enforcement modes. |
+| `/coach` | **Heuristic AI Coach** | Adaptive counselor that parses student logs to diagnose burnouts, project exam readiness, and suggest focus directions. |
+| `/analytics` | **Analytics Console** | Comprehensive dashboards plotting study hours, subject splits, focus ratios, and error type distributions. |
+
+---
+
+## 4. Design Philosophy
+
+FocusForge adheres to three visual and operational principles:
+
+1.  **Immersive Dark Aesthetic**: Utilizes a deep background (`#090a0f`) decorated with subtle radial gradients to simulate a physical dark room. This reduces eye strain during long-duration study sessions.
+2.  **Glassmorphism Surfaces**: Employs frosted glass panels (border highlights, background blur, high shadows) to give the application a premium, modern SaaS console feel.
+3.  **Low-Friction Gamification**: Rewards students with XP (1000 XP per level) for completing timers, logging mistakes, or executing revisions. Streaks visualizer builds a sense of momentum without introducing overwhelming dopamine loops.
+4.  **No-Distraction Architecture**: Offers a distinct "Monk Mode" which minimizes sidebar links, collapses panels, and enforces fullscreens to isolate the student's field of view.

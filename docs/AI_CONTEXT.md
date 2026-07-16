@@ -1,86 +1,82 @@
 # FocusForge — AI Agent Context
 
-Read this first. It captures conventions and constraints that aren't obvious from the code.
+This context guide is designed specifically for AI coding assistants (LLMs) working on the FocusForge repository. Review this file before proposing or executing code changes to ensure compatibility with Next.js, state management strategies, and styling constraints.
 
-## ⚠️ Critical: this Next.js differs from your training data
-`AGENTS.md` (repo root) states: **"This is NOT the Next.js you know"** — this version has
-breaking API/convention changes. **Before writing any Next.js code, read the relevant guide in
-`node_modules/next/dist/docs/`** and heed deprecation notices. Do not assume router/config APIs
-from memory. Current version: **Next.js 16.2.6, React 19, App Router**.
+---
 
-## Tech stack
-Next.js 16 (App Router) · React 19 · TypeScript (strict) · Tailwind CSS **v4** (CSS-first,
-`@theme` in `globals.css`, **no `tailwind.config.js`**) · Zustand + `persist` (localStorage) ·
-Recharts · framer-motion · lucide-react · canvas-confetti · Prisma/SQLite (scaffolded, unused) ·
-Web Audio API (ambient sound). Path alias `@/*` → `src/*`.
+## 1. ⚠️ Critical Warnings
 
-## Coding conventions
-- Feature pages are `"use client"` and render inside `<WorkspaceLayout title="…">`. `/` is the exception.
-- Styling is **Tailwind utilities + the design tokens/utilities in `globals.css`**. Use token
-  classes (`bg-accent-purple`, `text-physics`, `border-card-border`), not raw hexes.
-- Subject color-coding is canonical: Physics=blue, Chemistry=green, Maths=amber (see DESIGN_SYSTEM.md).
-- Panels: `.glass-panel` + `rounded-xl`. Interactions use framer-motion `whileHover`/`whileTap`.
-- Icons from `lucide-react`. Filenames are kebab-case; components PascalCase; hooks `use-*`.
-- State mutations go through Zustand store actions only — never mutate store objects directly.
+### "This is NOT the Next.js you know"
+*   **Version**: Next.js 16.2.6, React 19.2.4.
+*   **App Router & Routing**: Do not use standard router APIs from memory without verifying compatibility. Refer to Next.js documentation inside `node_modules/next/dist/docs/` when encountering routing warnings.
+*   **Tailwind CSS v4**: This project uses Tailwind CSS v4 (`@tailwindcss/postcss`). There is **no tailwind.config.js**. All configuration, customizations, custom theme variables, and glassmorphic presets are defined directly inside `src/app/globals.css` using the `@theme` directive.
 
-## Design principles
-Dark, focused, "premium tool" feel. Reduce dopamine loops (Monk Mode hides nav + widgets).
-Gamify progress (XP/level/streak) without clutter. Consistent spacing, `max-w-7xl` content column.
+---
 
-## Reusable patterns (prefer over reinventing)
-- Shared primitives in `src/components/ui/` (`Card`, `Button`, `ProgressBar`, `EmptyState`,
-  `SectionHeader`). ⚠ Pages currently hand-roll these with `.glass-panel` divs + raw `<button>`s
-  — **the primitives are imported by zero pages today**. For new UI prefer the primitive; when
-  editing an existing page, match its local pattern unless you're deliberately consolidating.
-- Spaced repetition: reuse `src/lib/spaced-rep.ts` (don't re-derive intervals).
-- Hydration-safe client-only values: gate on a `mounted` flag or `useIsClient()` — render
-  placeholders on the server pass (see how dashboard charts guard Recharts).
+## 2. Technologies & Libraries
 
-## Known constraints
-- **No backend wired up.** Data = Zustand + localStorage, seeded with demo values. Prisma
-  schema/`db.ts` exist but nothing in the UI queries them. Don't assume DB reads/writes work.
-- **Mock data**: dashboard/analytics use inline constants and `Math.random()` for some charts,
-  heatmaps, and the distraction simulator. `Math.random()` in `sound-player.tsx` is intentional
-  audio noise synthesis — leave it.
-- **Single implicit user** ("ILHAM FAROOQUE", avatar "AS"); no auth.
-- `pauseSession()` sets `status` to `"idle"` (there is no dedicated `paused` state) — intentional.
-- Landing `/` renders its own background, outside `WorkspaceLayout`.
+*   **Core**: Next.js 16 (App Router), React 19, TypeScript (Strict).
+*   **State Layer**: Zustand (`zustand/middleware/persist` persisting stores to `localStorage`).
+*   **Database (Inactive scaffolding)**: Prisma client mapping SQLite database `prisma/dev.db`.
+*   **Visualizations**: Recharts.
+*   **Animations**: Framer Motion.
+*   **Icons**: Lucide React.
+*   **Confetti**: canvas-confetti.
+*   **Audio Synthesis**: Browser Web Audio API (Synthesizing sounds in real-time).
 
-## Performance guidelines
-- Keep feature pages client components but lazy-guard heavy client libs (Recharts) behind a mount flag.
-- Reuse store selectors; avoid duplicating derived calculations across components.
-- No premature optimization — the app is small; measure before refactoring.
+---
 
-## Accessibility standards (current state + gaps)
-- Present: `lang="en"`, `color-scheme: dark`, `aria-label` on icon buttons, semantic headings,
-  keyboard shortcuts, mobile 44px-ish touch targets via touch utilities.
-- **Gaps / opportunities:** `layout.tsx` viewport sets `maximumScale:1, userScalable:false`
-  (blocks pinch-zoom — a WCAG concern); `globals.css` has **no** `:focus-visible` outline rules
-  or `prefers-reduced-motion` handling; some interactive `<div>`s/nav items lack full ARIA and
-  keyboard semantics. Improve these when touching the relevant files.
+## 3. Important Coding & Styling Patterns
 
-## Common commands
-```
-npm run dev            # dev server (hot reload)
-npm run build          # production build (the gate — must pass)
-npm run start          # serve production build on :3000
-npm run lint           # eslint
-npm run db:push        # prisma schema → sqlite (backend work only)
-npm run db:seed        # tsx prisma/seed.ts
-npm run prisma:generate
-```
-Helper: `Start-Localhost-3000.cmd` / `start-localhost-3000.ps1` launch the app on :3000.
+*   **Client Components**: Almost all feature directories under `src/app/` are Client Components marked with `"use client"`.
+*   **Standard Page Structure**: Wrap all feature components in `<WorkspaceLayout title="Page Name">` to inherit the global timer, sidebars, header values, and keyboard shortcuts.
+*   **Subject Accent Palette**: Maintain strict color association tags for academic subjects:
+    *   **Physics** = `--color-physics` (blue / `#3b82f6`)
+    *   **Chemistry** = `--color-chemistry` (green / `#10b981`)
+    *   **Maths** = `--color-maths` (amber / `#f59e0b`)
+*   **UI Primitives**: Prefer importing shared primitives from `src/components/ui/` (`Card`, `Button`, `ProgressBar`, `EmptyState`, `SectionHeader`) rather than hand-rolling raw divs or button tags.
+*   **Interactive motion animations**: Wrap clickable list items or buttons in Framer Motion wrappers. Use standard presets: `whileHover={{ scale: 1.02 }}` and `whileTap={{ scale: 0.98 }}`.
 
-## Areas intentionally left unchanged (don't "fix" without reason)
-- Zustand stores' business logic (XP math, streak/timer transitions, spaced intervals).
-- `lib/coach-logic.ts`, `lib/spaced-rep.ts` algorithms.
-- `sound-player.tsx` Web-Audio synthesis (its randomness is correct).
-- Prisma schema, seed, env config, routing behavior, feature workflows.
+---
 
-## Future improvement opportunities
-1. **Wire Prisma/SQLite to the UI** (replace localStorage demo data with real persistence + a user).
-2. **Adopt `src/components/ui/` primitives across pages** to remove duplicated `.glass-panel`/button markup.
-3. **Tokenise** the hardcoded `#7c4ce6` purple-hover shade; standardise radii.
-4. **Accessibility**: re-enable zoom, add `:focus-visible` + `prefers-reduced-motion`, complete ARIA.
-5. Replace `Math.random()`/mock dashboard data with values derived from store history.
-6. Extract repeated KPI-stat and modal blocks into shared components.
+## 4. Coding Conventions
+
+*   **Directory Naming**: `kebab-case` (e.g. `src/app/study-workspace/`).
+*   **File Naming**: `kebab-case` (e.g. `use-study-store.ts`, `sound-player.tsx`).
+*   **Component Naming**: `PascalCase` (e.g. `WorkspaceLayout`, `Sidebar`).
+*   **State Mutation Rules**: State modifications must be performed exclusively by calling Zustand store actions. Never mutate store objects directly outside store methods.
+
+---
+
+## 5. File Constraints & Safety Zones
+
+### 🛡️ Files that should rarely or never be modified:
+*   [src/lib/spaced-rep.ts](file:///c:/Users/Lenovo/Desktop/JEE/src/lib/spaced-rep.ts): Contains mathematical SuperMemo-2 calculations driving study review intervals.
+*   [src/components/sound-player.tsx](file:///c:/Users/Lenovo/Desktop/JEE/src/components/sound-player.tsx): Custom Web Audio API synthesizer. Random math loops are intentional to create static white noise and rain gusts.
+*   [prisma/schema.prisma](file:///c:/Users/Lenovo/Desktop/JEE/prisma/schema.prisma): Do not modify relational schemas unless tasked with database wiring.
+
+### 🟢 Safe Zones for Changes:
+*   **UI dashboard views** under `src/app/` (`/dashboard`, `/study`, `/mistakes`, `/revisions`, `/jee`, `/analytics`).
+*   **Shared Primitives** in `src/components/ui/` (`card.tsx`, `controls.tsx`).
+*   **Styling Customizations** added to the `@theme` block in `src/app/globals.css`.
+
+---
+
+## 6. Technical Debt & Pending Improvements
+
+*   **Feature Page Duplication**: Several feature routes (e.g. `/study`, `/mistakes`) currently hand-roll local `.glass-panel` divs and raw `<button>` elements instead of importing reusable primitives.
+*   **Database Disconnection**: A Prisma client and SQLite database configuration exist, but the UI depends entirely on Zustand/localStorage for data persistence.
+*   **Accessibility Constraints**:
+    *   Viewport settings in `layout.tsx` prevent user scaling (`userScalable: false`), which violates WCAG guidelines.
+    *   No standard focus outlines (`:focus-visible`) are configured in the global CSS template.
+    *   No dynamic keyboard shortcut indicators or visual screen-reader attributes are present on icon buttons.
+*   **Mock Data**: Heatmaps, focus score averages, and simulated website logs use inline constants and random math generators. These should eventually be derived from actual study history in Zustand storage.
+
+---
+
+## 7. Common Workflows
+
+*   `npm run dev` launches the hot-reloading development server on port `3000`.
+*   `npm run build` triggers compilation. **Always run builds before committing changes** to verify that TypeScript static analysis passes.
+*   `npm run lint` executes ESLint style rules.
+*   `npm run db:push` / `npm run db:seed` synchronizes and updates the unused SQLite scaffolding.
