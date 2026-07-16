@@ -1,21 +1,72 @@
-MIT License
+PROPRIETARY AND CONFIDENTIAL LICENSE
+FOCUSFORGE PROJECT
+Copyright (c) 2026 ILHAM FAROOQUE. All Rights Reserved.
 
-Copyright (c) 2026 ILHAM FAROOQUE
+IMPORTANT NOTICE: PLEASE READ THIS LICENSE AGREEMENT CAREFULLY. 
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This repository and all of its contents, including but not limited to the source code, layout, assets, components, workflows, algorithms, prompts, configuration, and documentation (collectively, the "Software"), are the sole and exclusive proprietary property of ILHAM FAROOQUE (the "Copyright Holder"). 
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+This Software is NOT open-source software. 
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Publication of this Software or repository on GitHub or any other platform does not constitute a waiver of any intellectual property rights, nor does it grant, imply, or convey any license, permission, or right of use, copy, modification, distribution, sublicensing, cloning, forking, reproduction, or creation of derivative works to the public or any third party for any purpose (whether personal, academic, commercial, or organizational), except as explicitly authorized in a separate, signed written agreement by the Copyright Holder.
+
+--------------------------------------------------------------------------------
+1. INTELLECTUAL PROPERTY OWNERSHIP
+--------------------------------------------------------------------------------
+All intellectual property rights in and to the Software, including without limitation all copyrights, trade dress, trade secrets, know-how, patents, and proprietary concepts, are and shall remain the sole and exclusive property of ILHAM FAROOQUE. This proprietary ownership extends to, but is not limited to:
+* All source code, scripts, build configurations, and codebase files (e.g., TSX, TS, CSS, SQL, JSON, etc.)
+* All documentation, user guides, README files, and text contents
+* The UI/UX designs, layouts, visuals, branding, logo designs, custom styling sheets, graphics, icons, and aesthetic elements
+* The database designs, schemas, APIs, folder structures, and naming conventions
+* The specific implementations of algorithms, business logic, workflows, and prompts included in the repository
+* Any other creative expression or technical implementation unique to this project
+
+--------------------------------------------------------------------------------
+2. EXPLICIT PROHIBITIONS
+--------------------------------------------------------------------------------
+Except as explicitly authorized in writing by the Copyright Holder, no individual, entity, organization, or automated system may:
+a) Use, run, host, deploy, or execute the Software or any portion thereof.
+b) Copy, duplicate, reproduce, clone, download, or mirror the repository or any part of the source code.
+c) Fork the repository, create branches, or merge any portion of the Software into other projects.
+d) Modify, translate, adapt, alter, or otherwise customize the Software.
+e) Reverse engineer, decompile, disassemble, or attempt to derive the source code of any compiled or minified assets, to the maximum extent permitted by applicable law.
+f) Create derivative works or similar software by copying substantial parts of the implementation.
+g) Redistribute, publish, republish, re-upload, sell, rent, lease, sublicense, or commercially exploit any portion of the Software or its assets.
+h) Extract code snippets, algorithms, design systems, layouts, styles, or logic for use in other projects.
+i) Scrape, crawl, index, or download any part of the Software for the purpose of training machine learning or artificial intelligence (AI) models, or inclusion in any AI training datasets.
+
+--------------------------------------------------------------------------------
+3. RESERVATION OF RIGHTS & NO IMPLIED LICENSE
+--------------------------------------------------------------------------------
+Any rights not expressly granted in this License are reserved exclusively by the Copyright Holder. 
+
+There are no implied licenses under this License. The hosting of this Software in a public or private GitHub repository is done solely for transparency, portfolio showcase, version control, or authorized collaboration. It does not imply or grant permission to copy, reuse, or modify the code under any GitHub default terms or terms of service, except for the basic rights to view the code on the GitHub platform as required by GitHub's standard operation.
+
+--------------------------------------------------------------------------------
+4. CONTRIBUTIONS AND PULL REQUESTS
+--------------------------------------------------------------------------------
+Unsolicited pull requests, forks, or code contributions submitted to this repository:
+a) Do not transfer ownership of the proprietary Software to the contributor.
+b) May be rejected or ignored at the sole discretion of the Copyright Holder.
+c) If accepted, all such contributions immediately become the exclusive proprietary property of ILHAM FAROOQUE, and the contributor hereby assigns all rights, titles, and interests in the contribution to ILHAM FAROOQUE, unless otherwise explicitly agreed in writing by both parties.
+
+--------------------------------------------------------------------------------
+5. ENFORCEMENT & LEGAL REMEDIES
+--------------------------------------------------------------------------------
+Any unauthorized use, copying, distribution, or modification of this Software constitutes copyright infringement and a breach of proprietary rights. The Copyright Holder reserves the right to pursue all available legal remedies, including but not limited to:
+* Filing DMCA takedown notices.
+* Seeking immediate injunctive relief to halt unauthorized use or distribution.
+* Initiating civil litigation to claim damages (including statutory damages, actual damages, and lost profits) and attorney's fees to the maximum extent permitted by law.
+
+--------------------------------------------------------------------------------
+6. DISCLAIMER OF WARRANTIES & LIMITATION OF LIABILITY
+--------------------------------------------------------------------------------
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+--------------------------------------------------------------------------------
+7. CONTACT FOR PERMISSION REQUESTS
+--------------------------------------------------------------------------------
+To request written permission for licensing, evaluation, academic analysis, or any other use of this Software, please contact:
+
+ILHAM FAROOQUE
+Email: ilhamfarooque786@gmail.com

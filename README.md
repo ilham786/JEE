@@ -183,7 +183,7 @@ Because all components are client-rendered, you can configure Next.js to export 
 ## 12. License & Attribution
 
 ### License
-This project is licensed under the MIT License - see the [LICENSE](file:///c:/Users/Lenovo/Desktop/JEE/LICENSE) file for details.
+**PROPRIETARY AND CONFIDENTIAL.** This repository is proprietary software and is **NOT open source**. All intellectual property rights are reserved exclusively by the copyright holder, **ILHAM FAROOQUE**. Publication of this repository on GitHub does not grant any license or permission to use, copy, modify, distribute, clone, fork, or create derivative works. Any unauthorized use, reproduction, model training, or commercial exploitation is strictly prohibited. For inquiries or permission requests, contact [ilhamfarooque786@gmail.com](mailto:ilhamfarooque786@gmail.com). See the full [LICENSE](file:///c:/Users/Lenovo/Desktop/JEE/LICENSE) file for more information.
 
 ### Developer Credits
 Developed by **ILHAM FAROOQUE** — [GitHub Profile](https://github.com/ilham786)
