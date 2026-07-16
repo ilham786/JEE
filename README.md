@@ -1,51 +1,95 @@
-# FocusForge
+<p align="center">
+  <img src="https://img.icons8.com/nolan/128/brain.png" alt="FocusForge Logo" width="80" />
+</p>
 
-FocusForge is a polished dark-mode study workspace and planner designed specifically for IIT-JEE and competitive exam aspirants. By consolidating study timers, mistake logs, revision planning, distraction blocking, progress tracking, and heuristic coaching under a unified, high-focus interface, FocusForge replaces scattered study tools with a centralized "study operating system."
+<h1 align="center">FocusForge</h1>
+
+<p align="center">
+  <strong>A polished, dark-mode study workspace and planner designed specifically for IIT-JEE and competitive exam aspirants.</strong>
+</p>
+
+<p align="center">
+  FocusForge consolidates study timers, mistake logs, revision planning, distraction blocking, progress tracking, and heuristic coaching under a unified, high-focus interface—replacing scattered study tools with a centralized "study operating system."
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/version-0.1.0-blue.svg?style=for-the-badge&color=8b5cf6" alt="Version" />
+  <img src="https://img.shields.io/badge/license-proprietary-red.svg?style=for-the-badge&color=ef4444" alt="License" />
+  <img src="https://img.shields.io/badge/Next.js-16.2.6-black?style=for-the-badge&logo=next.js" alt="Next.js" />
+  <img src="https://img.shields.io/badge/React-19.2.4-61dafb?style=for-the-badge&logo=react&logoColor=black" alt="React" />
+</p>
+
+---
+
+## 📖 Table of Contents
+*   [1. Project Overview & Purpose](#1-project-overview--purpose)
+*   [2. Key Features](#2-key-features)
+*   [3. Tech Stack](#3-tech-stack)
+*   [4. Project Architecture & Folder Structure](#4-project-architecture--folder-structure)
+*   [5. Installation & Setup](#5-installation--setup)
+*   [6. Build & Operations Commands](#6-build--operations-commands)
+*   [7. Environment Variables](#7-environment-variables)
+*   [8. Deployment Instructions](#8-deployment-instructions)
+*   [9. Performance & Responsive Design](#9-performance--responsive-design)
+*   [10. Coding Conventions](#10-coding-conventions)
+*   [11. Roadmap & Limitations](#11-roadmap--limitations)
+*   [12. License & Attribution](#12-license--attribution)
 
 ---
 
 ## 1. Project Overview & Purpose
 
 Preparing for high-stakes competitive examinations like IIT-JEE requires exceptional discipline, consistent revision, and rigorous analysis of mistakes. FocusForge hardwires these behaviors into the student’s daily routine. It helps aspirants:
-*   Maintain focus discipline with Pomodoro, Deep Work, and Custom timers.
-*   Systematically catalog and reschedule mistakes using standard spaced repetition cycles.
-*   Consolidate syllabus checklists across Physics, Chemistry, and Mathematics.
-*   Block digital distractions through simulated blacklist and exam modes.
-*   Review progress trends, syllabus coverage ratios, and error type breakdowns.
-*   Consult an adaptive heuristic AI study coach to identify weaknesses and prevent burnout.
 
-Developed by **ILHAM FAROOQUE** (https://github.com/ilham786). Package name: `focusforge`.
+*   **Timer Control**: Maintain focus discipline with Pomodoro, Deep Work, and Custom timers.
+*   **Journal Logs**: Systematically catalog and reschedule mistakes using standard spaced repetition cycles.
+*   **Syllabus Integration**: Consolidate syllabus checklists across Physics, Chemistry, and Mathematics.
+*   **Distraction Shield**: Block digital distractions through simulated blacklist and exam modes.
+*   **Visual Dashboards**: Review progress trends, syllabus coverage ratios, and error type breakdowns.
+*   **Adaptive Heuristics**: Consult an adaptive heuristic AI study coach to identify weaknesses and prevent burnout.
 
----
-
-## 2. Key Features
-
-*   **Landing Page**: A high-fidelity, standalone marketing landing page introducing project modules, call-to-actions, and developer credits.
-*   **Study Sessions**: Interactive study timer with customizable countdowns, active tick transitions (focus → break → idle), automated XP awards, Monk Mode, and synthesized ambient background audio loops (rainfall, white noise, lofi hums) generated locally using the browser's Web Audio API.
-*   **Mistake Journal**: A structured log for tracking conceptual gaps, silliness, calculation, or time-pressure mistakes. Supports chapter filters, subject splits, and full-text search.
-*   **Revision Planner**: An automated review scheduler. Based on SuperMemo-2 algorithms, it schedules mistakes for review at `[1, 3, 7, 15, 30]` days, highlighting due items on a calendar.
-*   **JEE Prep Hub**: Syllabus visualizer mapping completeness percentages, solved PYQ counts, weak topics, and key formula reference blocks per subject.
-*   **Distraction Blocker**: Custom blocker interface managing website blacklists, whitelist restrictions, schedule slots, and exam locks.
-*   **Analytics Dashboard**: Visual charts plotting daily study trends, subject progress coverage, and mistake distribution metrics.
-*   **AI Coach**: Adaptive chat assistant parsing user log histories to suggest study paths and recover from exhaustion.
+Developed by **ILHAM FAROOQUE** ([GitHub Profile](https://github.com/ilham786)). Package name: `focusforge`.
 
 ---
 
-## 3. Tech Stack
+## 🚀 2. Key Features
 
-*   **Next.js 16.2.6 (App Router)**: Core React framework for routing and layout.
-*   **React 19.2.4**: UI render layer.
-*   **TypeScript 5**: Structural code safety and interfaces.
-*   **Tailwind CSS v4**: CSS-first styles, customizing themes through `@theme` variables inside [globals.css](file:///c:/Users/Lenovo/Desktop/JEE/src/app/globals.css).
-*   **Zustand**: Client-side state management persisted to browser local storage.
-*   **Prisma ORM & SQLite**: Relational database structure set up for local setup (currently scaffolded but unwired from UI).
-*   **Framer Motion**: UI card entrance fades and interactive micro-animations.
-*   **Recharts**: Charting engine rendering analytics dashboards.
-*   **canvas-confetti**: Celebration triggers when completing focus blocks.
+| Module | Feature Type | Description |
+| :--- | :--- | :--- |
+| **Landing Page** | 🎨 Hero Hub | A high-fidelity, standalone marketing landing page introducing project modules, call-to-actions, and developer credits. |
+| **Study Sessions** | ⏱️ Focused Timers | Interactive study timer with customizable countdowns, active tick transitions (focus &rarr; break &rarr; idle), automated XP awards, Monk Mode, and synthesized ambient background audio loops (rainfall, white noise, lofi hums) generated locally using the browser's Web Audio API. |
+| **Mistake Journal** | 📓 Spaced Logging | A structured log for tracking conceptual gaps, silliness, calculation, or time-pressure mistakes. Supports chapter filters, subject splits, and full-text search. |
+| **Revision Planner** | 📅 Smarter Reviews | An automated review scheduler. Based on SuperMemo-2 algorithms, it schedules mistakes for review at `[1, 3, 7, 15, 30]` days, highlighting due items on a calendar. |
+| **JEE Prep Hub** | 🎯 Syllabus Progress | Syllabus visualizer mapping completeness percentages, solved PYQ counts, weak topics, and key formula reference blocks per subject. |
+| **Distraction Blocker** | 🔒 Blocker Registry | Custom blocker interface managing website blacklists, whitelist restrictions, schedule slots, and exam locks. |
+| **Analytics Dashboard**| 📊 Data Charts | Visual charts plotting daily study trends, subject progress coverage, and mistake distribution metrics. |
+| **AI Coach** | 🤖 Advisory | Adaptive chat assistant parsing user log histories to suggest study paths and recover from exhaustion. |
 
 ---
 
-## 4. Project Architecture & Folder Structure
+## 🛠 3. Tech Stack
+
+| Dependency | Target Version | Project Role |
+| :--- | :--- | :--- |
+| **Next.js** | `16.2.6` (App Router) | Core React framework for routing and layouts. |
+| **React** | `19.2.4` | UI rendering library. |
+| **TypeScript** | `5` | Strong type analysis and interface safety. |
+| **Tailwind CSS** | `v4` | CSS-first styling, using custom `@theme` variables inside [globals.css](file:///c:/Users/Lenovo/Desktop/JEE/src/app/globals.css). |
+| **Zustand** | `^5.0.13` | Client-side state management persisted to browser local storage. |
+| **Prisma ORM** | `^6.19.3` | Relational database client scaffolding. |
+| **SQLite** | Local dev | Development database configured (currently unwired from UI). |
+| **Framer Motion** | `^12.40.0` | UI card entrance fades and interactive micro-animations. |
+| **Recharts** | `^3.8.1` | Charting engine rendering analytics dashboards. |
+| **canvas-confetti** | `^1.9.4` | Completion celebration effects. |
+
+---
+
+## 📂 4. Project Architecture & Folder Structure
+
+FocusForge's directories are structured to isolate configurations, documentation folders, database models, layout components, and Zustand store parameters:
+
+<details>
+<summary>📁 Click to expand / collapse full directory tree structure</summary>
 
 ```
 FocusForge/
@@ -74,65 +118,70 @@ FocusForge/
 │   └── store/               # Zustand persisted storage definitions
 └── package.json             # Core dependency settings and script commands
 ```
+</details>
 
 For a detailed breakdown of state architecture and data flow pipelines, refer to [ARCHITECTURE.md](file:///c:/Users/Lenovo/Desktop/JEE/docs/ARCHITECTURE.md).
 
 ---
 
-## 5. Installation & Setup
+## 📦 5. Installation & Setup
 
 ### Prerequisites
-*   Node.js (v18 or higher recommended)
-*   npm or yarn package managers
+*   **Node.js** (v18 or higher recommended)
+*   **npm** or **yarn** package managers
 
-### Steps
-1.  **Install dependencies**:
-    ```bash
-    npm install
-    ```
-2.  **Generate Prisma client**:
-    ```bash
-    npm run prisma:generate
-    ```
-3.  **Initialize the local SQLite database**:
-    ```bash
-    npm run db:push
-    ```
-4.  **Seed the local database** (adds initial demo models):
-    ```bash
-    npm run db:seed
-    ```
-5.  **Start the development server**:
-    ```bash
-    npm run dev
-    ```
-6.  Open [http://localhost:3000](http://localhost:3000) in your web browser.
+### Setup Steps
+Follow these instructions to run the workspace locally:
 
----
-
-## 6. Build & Operations Commands
-
-```bash
-npm run dev              # Starts development environment with hot-reloading
-npm run build            # Compiles client code for production release
-npm run start            # Serves compiled output on local port 3000
-npm run lint             # Runs ESLint analysis for code quality
-npm run db:reset         # Resets local SQLite database and runs seeds
-```
+1. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+2. **Generate Prisma client**:
+   ```bash
+   npm run prisma:generate
+   ```
+3. **Initialize the local SQLite database**:
+   ```bash
+   npm run db:push
+   ```
+4. **Seed the local database** (adds initial demo models):
+   ```bash
+   npm run db:seed
+   ```
+5. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
+6. Open [http://localhost:3000](http://localhost:3000) in your web browser.
 
 ---
 
-## 7. Environment Variables
+## ⚡ 6. Build & Operations Commands
+
+Manage builds, formatting, and operations with these terminal commands:
+
+| Command | Action |
+| :--- | :--- |
+| `npm run dev` | Starts development environment with hot-reloading |
+| `npm run build` | Compiles client code for production release |
+| `npm run start` | Serves compiled output on local port 3000 |
+| `npm run lint` | Runs ESLint analysis for code quality |
+| `npm run db:reset` | Resets local SQLite database and runs seeds |
+
+---
+
+## 🔑 7. Environment Variables
 
 Relational databases configuration variables are located in `.env` (derived from `.env.example`):
 *   `DATABASE_URL`: Location URL of the target database (defaults to the SQLite dev file `"file:./dev.db"`).
 
 > [!WARNING]
-> Never commit actual secret keys or connection credentials to public version controls. Keep `.env` included in `.gitignore`.
+> **Security Notice**: Never commit actual secret keys or connection credentials to public version controls. Keep `.env` included in `.gitignore`.
 
 ---
 
-## 8. Deployment Instructions
+## 🌐 8. Deployment Instructions
 
 ### Vercel / Netlify
 FocusForge can be deployed directly to Vercel or similar host providers:
@@ -145,7 +194,7 @@ Because all components are client-rendered, you can configure Next.js to export 
 
 ---
 
-## 9. Performance & Responsive Design
+## ⚡ 9. Performance & Responsive Design
 
 ### Performance
 *   **Lazy Chart Rendering**: Heavy charting packages (Recharts) are protected by client mount hooks (`useIsClient`) to prevent SSR delays and optimize first-paint load times.
@@ -157,7 +206,7 @@ Because all components are client-rendered, you can configure Next.js to export 
 
 ---
 
-## 10. Coding Conventions
+## 📖 10. Coding Conventions
 
 *   **Page Structures**: Every feature page inside `src/app/` must be a client component using `"use client"` and wrapped in the `WorkspaceLayout` component.
 *   **Theme Integration**: Utilize Tailwind v4 variables (`text-physics`, `bg-accent-purple`) rather than hardcoded hex values to maintain styling parity.
@@ -166,7 +215,7 @@ Because all components are client-rendered, you can configure Next.js to export 
 
 ---
 
-## 11. Roadmap & Limitations
+## 🗺️ 11. Roadmap & Limitations
 
 ### Roadmap
 *   **Database Integration**: Wire SQLite/Prisma to the UI to replace browser localStorage persistences.
@@ -180,10 +229,12 @@ Because all components are client-rendered, you can configure Next.js to export 
 
 ---
 
-## 12. License & Attribution
+## 📜 12. License & Attribution
 
 ### License
-**PROPRIETARY AND CONFIDENTIAL.** This repository is proprietary software and is **NOT open source**. All intellectual property rights are reserved exclusively by the copyright holder, **ILHAM FAROOQUE**. Publication of this repository on GitHub does not grant any license or permission to use, copy, modify, distribute, clone, fork, or create derivative works. Any unauthorized use, reproduction, model training, or commercial exploitation is strictly prohibited. For inquiries or permission requests, contact [ilhamfarooque786@gmail.com](mailto:ilhamfarooque786@gmail.com). See the full [LICENSE](file:///c:/Users/Lenovo/Desktop/JEE/LICENSE) file for more information.
+
+> [!IMPORTANT]
+> **PROPRIETARY AND CONFIDENTIAL.** This repository is proprietary software and is **NOT open source**. All intellectual property rights are reserved exclusively by the copyright holder, **ILHAM FAROOQUE**. Publication of this repository on GitHub does not grant any license or permission to use, copy, modify, distribute, clone, fork, or create derivative works. Any unauthorized use, reproduction, model training, or commercial exploitation is strictly prohibited. For inquiries or permission requests, contact [ilhamfarooque786@gmail.com](mailto:ilhamfarooque786@gmail.com). See the full [LICENSE](file:///c:/Users/Lenovo/Desktop/JEE/LICENSE) file for more information.
 
 ### Developer Credits
-Developed by **ILHAM FAROOQUE** — [GitHub Profile](https://github.com/ilham786)
+Developed with 💜 by **ILHAM FAROOQUE** — [GitHub Profile](https://github.com/ilham786)
